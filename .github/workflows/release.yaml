@@ -17,9 +17,8 @@ jobs:
           node-version: '18.x'
       - name: install dependencies
         run: |
-          npm install -g pnpm
-          pnpm i
-
+          npm i
+          
       - name: Calculate new version number
         id: get_version
         uses: battila7/get-version-action@v2
