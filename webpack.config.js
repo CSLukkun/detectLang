@@ -12,6 +12,11 @@ module.exports = {
         path: path.join(__dirname, './dist/'),
         filename: '[name].js'
     },
+    resolve: {
+        alias: {
+          XRegExp: 'xregexp'
+        }
+      },
     optimization: {
         minimizer: [
             new TerserPlugin({
