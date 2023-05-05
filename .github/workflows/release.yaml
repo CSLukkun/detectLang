@@ -16,20 +16,27 @@ jobs:
         with:
           node-version: '14.x'
       - name: install dependencies
-        run: npm ci
+        run: |
+          npm install -g pnpm
+          pnpm ci
 
       - name: Calculate new version number
         id: get_version
         uses: battila7/get-version-action@v2
+
+      - name: build
+        run: npm run build
       
       - name: Update version
         run: |
           echo "updating package.json with new version number: ${{steps.get_version.outputs.version-without-v}}"
           npx json -I -f package.json -e "this.version='${{steps.get_version.outputs.version-without-v}}'"
           echo "Updated package.json"
+          move package.json ./dist
           cat package.json
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v2
         with:
             token: ${{ secrets.NPM_TOKEN }}
+            path: ./dist
