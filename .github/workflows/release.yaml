@@ -19,6 +19,7 @@ jobs:
         run: |
           npm install -g pnpm
           pnpm i
+          ls ./node_modules
 
       - name: Calculate new version number
         id: get_version
