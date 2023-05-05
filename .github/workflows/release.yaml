@@ -19,14 +19,15 @@ jobs:
         run: |
           npm install -g pnpm
           pnpm i
-          ls ./node_modules
 
       - name: Calculate new version number
         id: get_version
         uses: battila7/get-version-action@v2
 
       - name: build
-        run: npm run build
+        run: |
+          ls node_modules
+          npm run build
       
       - name: Update version
         run: |
