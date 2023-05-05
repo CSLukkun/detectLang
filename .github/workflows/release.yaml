@@ -14,11 +14,12 @@ jobs:
       - name: set up node
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '16.x'
       - name: install dependencies
         run: |
-          npm i
-          
+          npm install -g pnpm
+          pnpm i
+
       - name: Calculate new version number
         id: get_version
         uses: battila7/get-version-action@v2
