@@ -1,0 +1,35 @@
+name: Release New Version
+
+on:
+  push:
+    tags: [ v\d+\.\d+\.\d+ ]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: install dependencies
+        run: npm ci
+
+      - name: Calculate new version number
+        id: get_version
+        uses: battila7/get-version-action@v2
+      
+      - name: Update version
+        run: |
+          echo "updating package.json with new version number: ${{steps.get_version.outputs.version-without-v}}"
+          npx json -I -f package.json -e "this.version='${{steps.get_version.outputs.version-without-v}}'"
+          echo "Updated package.json"
+          cat package.json
+
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v2
+        with:
+            token: ${{ secrets.NPM_TOKEN }}
