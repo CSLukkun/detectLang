@@ -18,7 +18,7 @@ jobs:
       - name: install dependencies
         run: |
           npm install -g pnpm
-          pnpm ci
+          pnpm i
 
       - name: Calculate new version number
         id: get_version
