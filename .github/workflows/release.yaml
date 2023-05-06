@@ -35,9 +35,3 @@ jobs:
           npx json -I -f package.json -e "this.version='${{steps.get_version.outputs.version-without-v}}'"
           echo "Updated package.json"
           mv package.json ./dist
-
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v2
-        with:
-            token: ${{ secrets.NPM_TOKEN }}
-            package: ./dist

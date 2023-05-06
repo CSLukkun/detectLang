@@ -1,4 +1,4 @@
-const XRegExp = require('XRegExp')
+const XRegExp = require('xregexp')
 
 function detectWord(word) {
     const scores = {}
